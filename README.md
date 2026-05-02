@@ -9,6 +9,10 @@ Prácticas de Machine Learning en Python.
 
 - `02_regresion_lineal_sklearn.ipynb`  
   Entrenamiento del mismo modelo usando scikit-learn y comparación con la implementación manual.
+  
+- `03_regresion_logistica_desde_cero.ipynb`  
+  Implementación manual de regresión logística, función sigmoide, función de coste logarítmica, descenso de gradiente y visualización del camino de aprendizaje.
+
 
 ## Objetivo
 
