@@ -219,6 +219,34 @@ Enfoque:
 
 ---
 
+## 🧠 6. Andrej Karpathy — How I use LLMs
+
+Video:  
+https://www.youtube.com/watch?v=EWvNQjAaOHw
+
+Estado actual:  
+Video completado el 29/08/2026.
+
+Temas principales:
+
+- Los LLM como compresión estadística y probabilística de los datos de entrenamiento
+- Diferencia entre el modelo base, la ventana de contexto y la aplicación
+- Modelos de razonamiento y aprendizaje por refuerzo
+- Uso de búsqueda en Internet y deep research
+- Carga de archivos y documentos en el contexto
+- Uso de intérpretes de Python para análisis y visualización
+- Herramientas, memoria y multimodalidad
+- Selección del modelo según la dificultad y el tipo de tarea
+
+Enfoque:
+
+- Comprender qué información proviene del entrenamiento y cuál llega mediante herramientas
+- Elegir modelos de razonamiento para problemas complejos de matemática, código y lógica
+- Verificar información reciente o exacta usando fuentes externas
+- Utilizar los LLM como asistentes de aprendizaje y trabajo sin confundir generación probabilística con recuperación exacta
+
+---
+
 # 🚀 Objetivo a mediano plazo
 
 Construir una base sólida para desarrollar proyectos útiles de Machine Learning aplicados a datos reales, especialmente en contextos de análisis financiero, datos regulatorios, calidad de información y detección de patrones/anomalías.
