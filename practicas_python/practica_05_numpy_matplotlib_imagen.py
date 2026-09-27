@@ -35,6 +35,7 @@ def main():
                        [255, 150, 200, 250, 255]])
     print(f"shape de matriz: {matriz.shape}")
     print(f"dtype de matriz: {matriz.dtype}")
+    print(f"ndim de matriz: {matriz.ndim}")
     #Returns: AxesImage
     imagen = plt.imshow(matriz,cmap='gray', vmin=0, vmax=255)
     plt.show()
