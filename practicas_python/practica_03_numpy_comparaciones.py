@@ -6,9 +6,9 @@ Esto después es muy útil con datos e imágenes: por ejemplo, seleccionar valor
 import numpy as np
 
 
-def crear_array()-> np.array:
+def crear_array()-> np.ndarray:
     return np.array([[12, 80, 150, 220],
-              [35, 125, 90, 255]
+              [35, 125, 90, 255],
               [180, 60, 110, 40]])
 
 def main():
@@ -25,4 +25,12 @@ def main():
     print(matriz)
     print(f"Shape: {matriz.shape}")
     print(f"dtype: {matriz.dtype}")
-    mayor_100 = np.greater()
+    mayor_100 = matriz > 100
+    print(f"dtype de mayor_100: {mayor_100.dtype}")
+    print(f"mascara mayores a 100:\n {mayor_100}")
+    valores_mayores_100 = matriz[mayor_100]
+    print(f"selecciono solo mayores a 100: {valores_mayores_100}")
+    print(f"cantidad de elementos mayores a 100: {np.count_nonzero(mayor_100)}")
+
+if __name__ == "__main__":
+    main()
