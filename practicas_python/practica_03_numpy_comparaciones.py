@@ -1,7 +1,43 @@
 '''
+Práctica 03 — Comparaciones y máscaras booleanas en NumPy
+
 Objetivo
-Aprender qué ocurre cuando comparás un array entero contra un valor, en vez de comparar elemento por elemento manualmente.
-Esto después es muy útil con datos e imágenes: por ejemplo, seleccionar valores que cumplen determinada condición. Pero hoy trabajamos solamente con NumPy.
+
+Aprender qué ocurre cuando se compara un array completo
+contra un valor, en lugar de comparar manualmente cada
+elemento.
+
+Usá esta matriz:
+
+12   80  150  220
+35  125   90  255
+180  60  110   40
+
+Consigna
+
+1. Crear la matriz con NumPy.
+2. Mostrar el array completo.
+3. Mostrar su shape y su dtype.
+4. Comparar todo el array con el valor 100.
+5. Guardar el resultado de la comparación.
+6. Mostrar la máscara booleana obtenida.
+7. Mostrar el dtype de la máscara.
+8. Usar la máscara para seleccionar solamente
+   los valores mayores que 100.
+9. Contar cuántos valores cumplen la condición.
+
+Restricción
+
+No usar for.
+
+Idea clave
+
+Una comparación vectorizada devuelve un array de valores
+True y False con la misma forma que el array original.
+
+Ese array booleano puede usarse como máscara para
+seleccionar solamente las posiciones que cumplen
+la condición.
 '''
 import numpy as np
 

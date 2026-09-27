@@ -1,27 +1,45 @@
 '''
-Introducimos una idea nueva: broadcasting.
-Tenés una matriz:
+Práctica 04 — Broadcasting básico con NumPy
+
+Objetivo
+
+Introducir el concepto de broadcasting y observar cómo
+NumPy puede operar con arrays de formas diferentes cuando
+sus dimensiones son compatibles.
+
+Usá esta matriz:
+
 10   20   30   40
 50   60   70   80
 90  100  110  120
 
-y otro array de una dimensión:
-1   2   3   4
+Y este array de una dimensión:
+
+1  2  3  4
 
 Consigna
-1. Creá ambos arrays con NumPy.
-2. Mostrá el shape de cada uno.
-3. Sumá ambos arrays sin usar for.
-4. Guardá el resultado en una nueva variable.
-5. Mostrá el resultado y su shape.
-6. Explicame con tus palabras qué creés que hizo NumPy con el array [1, 2, 3, 4].
-Pauta mínima
-Antes de programarlo, fijate:
-- matriz: shape (3, 4)
-- vector: shape (4,)
-NumPy puede realizar ciertas operaciones entre arrays de formas distintas cuando sus dimensiones son compatibles. A eso se le llama broadcasting.
-No uses reshape, tile ni otras funciones para forzarlo. Queremos observar primero el comportamiento natural de NumPy.
-Escribilo vos y pasame código + salida. La parte que más me interesa esta vez es tu explicación del punto 6.
+
+1. Crear ambos arrays con NumPy.
+2. Mostrar el shape de cada uno.
+3. Sumarlos directamente, sin usar for.
+4. Guardar el resultado en una nueva variable.
+5. Mostrar el resultado.
+6. Mostrar el shape del resultado.
+7. Explicar qué hizo NumPy con el array
+   de shape (4,).
+
+No usar reshape ni tile.
+
+Idea clave
+
+La matriz tiene shape (3, 4) y el otro array tiene
+shape (4,).
+
+NumPy compara las dimensiones desde la derecha.
+Como los valores 4 coinciden, puede aplicar el array
+de cuatro elementos a cada fila de la matriz.
+
+A este mecanismo se lo llama broadcasting.
 '''
 
 import numpy as np
