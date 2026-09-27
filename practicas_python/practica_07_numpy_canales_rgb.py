@@ -39,3 +39,27 @@ No te doy la línea: esa parte te toca a vos. 😄
 Esta habilidad después sirve para entender operaciones sobre imágenes completas sin modificar píxel por píxel, 
 que es justamente una de las ventajas importantes de NumPy.
 '''
+import numpy as np
+import matplotlib.pyplot as plt
+
+def crear_imagen_artificial() -> np.ndarray:
+    return np.array([[(255, 0, 0),  (0, 255, 0),  (0, 0, 255),  (255, 255, 255)],
+                     [(255, 255, 0),(0, 255, 255),(255, 0, 255),(0, 0, 0)]     
+                     ])
+
+def main():
+    imagen_artificial = crear_imagen_artificial()
+    print(f"imagen :\n {imagen_artificial}")
+    print(f"shape = {imagen_artificial.shape} - ndim = {imagen_artificial.ndim} - dtype = {imagen_artificial.dtype}")
+    plt.imshow(imagen_artificial)
+    plt.savefig("imagen_artificial.png")
+    
+    copia_imagen = imagen_artificial.copy()
+    #poner en 0 el canal rojo de todos los píxeles, usando slicing
+    copia_imagen[:,:,0] = 0
+    print(copia_imagen)
+    plt.imshow(copia_imagen)
+    plt.savefig("imagen_sin_rojo.png")
+
+if __name__ == "__main__":
+    main()
