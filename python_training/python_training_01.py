@@ -55,6 +55,9 @@ def preparar_lote(tareas):
     aux = [x.copy() for x in (tareas) if x['estado'] == 'pendiente']
     for i in range(len(aux)):
         aux[i]['historial'] = aux[i]['historial'].copy()
+        aux[i]['estado'] = 'lista'
+        aux[i]['historial'].append('preparada')
+    print(f"Aux ==> {aux}")
     return aux
 
 def main():
@@ -87,7 +90,8 @@ def main():
             "historial": ["creada", "completada"],
         },
     ]
-
+    lotes_vacios = preparar_lote([])
+    print(lotes_vacios)
     print("========== tareas antes del cambio =========================")
     print(tareas)
     print("\n")
@@ -95,21 +99,6 @@ def main():
     print("========== preparar_lote(tareas) =========================")
     print(lotes_pendientes)
     print("\n")
-    #lotes_pendientes = preparar_lote([])
-    #print(lotes_pendientes)
-    #En cada tarea del lote, el estado debe pasar a ser "lista".
-    #En cada tarea del lote, se debe agregar la cadena "preparada" al final de su historial, 
-    #conservando sus entradas anteriores y su orden. 
-    for i in range(len(lotes_pendientes)):
-        lotes_pendientes[i]['estado'] = 'lista'
-        lotes_pendientes[i]['historial'].append('preparada')
-    print("============estado tareas a lista, agrego historial preparada ====================")
-    print("\n")
-    print(lotes_pendientes)
-    print("\n")
-    print("============== tareas originles=========================")
-    print("\n")
-    print(tareas)
-
+    
 if __name__ == "__main__":
     main()

@@ -40,7 +40,24 @@ def main():
                        [1.7, 1.1, 0.4]])
     
     clases = np.array([1, 0, 2, 1])
+    print(f"scores.shape = {scores.shape}")
+    print(f"clases.shape = {clases.shape}")
+    print(f"cant filas scores = {scores.shape[0]}")
+
+    res1 = scores[0][clases[0]]
     
+    filas = [x for x in range(len(clases))]
+    print(f"filas= {filas}")
+    print(f"res1= {res1}")
+    
+    resultado = scores[filas,clases[:]]
+    #Los dos son arrays/listas de índices del mismo tamaño, y NumPy los empareja elemento a elemento:
+    #filas[0] con clases[0] → (0,1)
+    #filas[1] con clases[1] → (1,0)
+    #filas[2] con clases[2] → (2,2)
+    #filas[3] con clases[3] → (3,1)
+    print("===============================================")
+    print(resultado)
 
 if __name__ == "__main__":
     main()
