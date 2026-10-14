@@ -47,7 +47,7 @@ fila = np.array([1, 2, 4, 8]) #shape (4,)
 
 # 4 es compatible con 1 y 1 es compatible con 3
 # el resultado tendrá shape 3,4 en caso de columna - fila 
-# y shape 4,3 en caso de fila - columna, en este caso 4 es compatible con 1 y 1 es compatible con 3
+# y shape 3,4 en caso de fila - columna, en este caso 4 es compatible con 1 y 1 es compatible con 3
 # la resta no es conmutativa por lo que esperaría resultados diferentes
 print(columna, columna.shape)
 print("=======================")
