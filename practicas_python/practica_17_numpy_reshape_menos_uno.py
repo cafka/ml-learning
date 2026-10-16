@@ -44,7 +44,7 @@ def main():
     print(f"array_3_columnas.shape = {array_3_columnas.shape} - size = {array_3_columnas.size}")
     print(array_3_columnas)
     print("====================================")
-    print(f"array_2_filas.shape = {array_2_filas.shape} - size = {datos.size}")
+    print(f"array_2_filas.shape = {array_2_filas.shape} - size = {array_2_filas.size}")
     print(array_2_filas)
     print("====================================")
 
