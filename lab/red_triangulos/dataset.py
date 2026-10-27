@@ -53,16 +53,32 @@ def crear_triangulo(matriz: np.array, v1, v2, v3):
     #v1-v3
     crear_lado(matriz,v1,v3)
 
+def crear_triangulos(cant_triangulos, x, y) -> np.ndarray:
+    np.random.seed(42)
+    triangulos = np.zeros((cant_triangulos,x,y))
+    for i in range(cant_triangulos):
+        v1 = (np.random.randint(0,x), np.random.randint(0,y))
+        v2 = (np.random.randint(0,x), np.random.randint(0,y))
+        v3 = (np.random.randint(0,x), np.random.randint(0,y))
+        crear_triangulo(triangulos[i], v1,v2,v3)
+        
+    return triangulos
+
 def main():
     #triangulo = crear_matriz(28,28,1,14,10,7,10,21) 
-    triangulo = crear_matriz(28,28) 
-    v1 = (1,3)
-    v2 = (10,7)
-    v3 = (5,21)
-    crear_triangulo(triangulo, v1,v2,v3)
-    
-    plt.imshow(triangulo,cmap='gray', vmin=0, vmax=255)
-    plt.savefig("triangulo2.png")
+    #triangulo = crear_matriz(256,256) 
+    #v1 = (1,3)
+    #v2 = (120,7)
+    #v3 = (205,201)
+    #crear_triangulo(triangulo, v1,v2,v3)
+    #plt.imshow(triangulo,cmap='gray', vmin=0, vmax=255)
+    #plt.savefig("triangulo2.png")
+
+    data_set = crear_triangulos(5,28,28)
+    #for i in (range(data_set.shape[0])):
+    #    plt.imshow(data_set[i],cmap='gray', vmin=0, vmax=255)
+    #    plt.savefig(f"triangulo_{i}.png")
+
 
 if __name__ == "__main__":
     main()
