@@ -262,7 +262,6 @@ def main():
         # De ese conjunto, conservar solamente las muestras donde al menos una medicion sea mayor que 27.
         mayor_27 = union_turnos > 27
         print(mayor_27)
-        # no recuerdo como obtener los indices de aquellas filas con al menos un true
         mascara = np.any(mayor_27,axis=1)
         resultado = union_turnos[mascara]
         print("Resultado:")
