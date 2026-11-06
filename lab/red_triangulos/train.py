@@ -1,7 +1,57 @@
 import torch
 from torch import nn
-import autoencoder
+import dataset as ds
+import numpy as np
+import autoencoder.modelo as mod
 
+def train_loop(model, loss_fn, optimizer, total_size, batch_size, x_img_size, y_img_size):
+    np.random.seed(42)
+    iteraciones = total_size//batch_size
+
+    # Set the model to training mode - important for batch normalization and dropout layers
+    # Unnecessary in this situation but added for best practices
+    model.train()
+
+    for i in range(iteraciones):
+        dataset = ds.crear_dataset(batch_size,x_img_size,y_img_size)
+        batch_normalizado = ds.dataset_normalizado(dataset)
+        # Compute prediction and loss
+        pred = model(batch_normalizado)
+        loss = loss_fn(pred, batch_normalizado)
+
+        # Backpropagation
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad()
+
+        loss, current = loss.item(), batch_size*(i+1)
+        print(f"loss: {loss:>7f}  [{current:>5d}/{total_size:>5d}]")
+
+
+def main():
+    total_size = 1000
+    batch_size = 100
+    x_img_size = 28
+    y_img_size = 28
+
+    model = mod.Autoencoder()
+    loss_fn = torch.nn.MSELoss()
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+    train_loop(
+        model=model,
+        loss_fn=loss_fn,
+        optimizer=optimizer,
+        total_size=total_size,
+        batch_size=batch_size,
+        x_img_size=x_img_size,
+        y_img_size=y_img_size
+    )
+
+if __name__ == "__main__":
+    main()
+    
+'''
 def train_loop(dataloader, model, loss_fn, optimizer):
     size = len(dataloader.dataset)
     # Set the model to training mode - important for batch normalization and dropout layers
@@ -41,3 +91,4 @@ def test_loop(dataloader, model, loss_fn):
     test_loss /= num_batches
     correct /= size
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>8f} \n")
+'''

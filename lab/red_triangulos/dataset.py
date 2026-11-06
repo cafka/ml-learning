@@ -154,6 +154,9 @@ def main():
     #print(datos_normalizados)
     print(torch.unique(datos_normalizados))
     print(f"dataset_normalizado.shape = {datos_normalizados.shape}")
+    print(datos_normalizados[0])
+    print("========================")
+    print(datos_normalizados[1])
     #for i in (range(data_set.shape[0])):
     #    plt.imshow(data_set[i],cmap='gray', vmin=0, vmax=255)
     #    plt.savefig(f"triangulo_{i}.png")
