@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import torch
 
 def crear_matriz (eje1: int, eje2: int) -> np.ndarray:
     matriz = np.zeros((eje1,eje2))
@@ -45,7 +46,51 @@ def crear_lado(matriz, vertice_1, vertice_2):
                     matriz[fila_pixel,inicio] = 255
                 inicio += 1
 
+def triangulo_valido(v1, v2, v3) -> bool:
+    '''
+    calcula el determinante para verificar que los puntos no estén alineados
+    '''
+    matriz_det = np.zeros((2, 2))
+    matriz_det[0][0] = v2[0]-v1[0]
+    matriz_det[0][1] = v2[1]-v1[1]
+    matriz_det[1][0] = v3[0]-v1[0]
+    matriz_det[1][1] = v3[1]-v1[1]
+
+    det = np.linalg.det(matriz_det)
+    return (det != 0)
+
+def longitud (u,v):
+    long_x = u[0] - v[0]
+    long_y = u[1] - v[1]
+    suma = long_x**2 + long_y**2
+    return np.sqrt(suma)
+
+def altura_valida (v1,v2,v3):
+    '''Para cada lado entre dos vértices, por ejemplo A y B, tomás el tercero C. 
+    Calculás el determinante con A como origen, o sea, det igual (Bx - Ax) por (Cy - Ay) menos (By - Ay) por (Cx - Ax). 
+    La longitud del lado AB es la raíz cuadrada de (Bx - Ax) al cuadrado más (By - Ay) al cuadrado.
+    '''
+    det = np.abs((v2[0]-v1[0])*(v3[1]-v1[1]) - ((v2[1]-v1[1])*(v3[0]-v1[0]))) #doble del area del triangulo
+    
+    longitud_v1_v2 = longitud (v1,v2)
+    altura1 = det/longitud_v1_v2
+    if altura1 < 2:
+        return False
+    else:
+        longitud_v1_v3 = longitud (v1,v3)
+        altura2 = det/longitud_v1_v3
+        if altura2 < 2:
+            return False
+        else:
+            longitud_v2_v3 = longitud (v2,v3)
+            altura3 = det/longitud_v2_v3
+            if altura3 < 2:
+                return False
+            else:
+                return True
+
 def crear_triangulo(matriz: np.array, v1, v2, v3):
+    print(f"v1 : {v1} - v2 : {v2} - v3 : {v3}")
     #v1-v2
     crear_lado(matriz,v1,v2)
     #v2-v3
@@ -54,15 +99,43 @@ def crear_triangulo(matriz: np.array, v1, v2, v3):
     crear_lado(matriz,v1,v3)
 
 def crear_triangulos(cant_triangulos, x, y) -> np.ndarray:
-    np.random.seed(42)
     triangulos = np.zeros((cant_triangulos,x,y))
-    for i in range(cant_triangulos):
+    i = 0
+    while i < cant_triangulos:
         v1 = (np.random.randint(0,x), np.random.randint(0,y))
         v2 = (np.random.randint(0,x), np.random.randint(0,y))
         v3 = (np.random.randint(0,x), np.random.randint(0,y))
-        crear_triangulo(triangulos[i], v1,v2,v3)
+        if triangulo_valido(v1, v2, v3) and altura_valida(v1, v2, v3):
+            crear_triangulo(triangulos[i], v1,v2,v3)
+            i += 1
         
     return triangulos
+
+def aplanar_triangulo(triangulo) -> np.ndarray:
+    #triangulo_aplanado = matriz_triangulo.reshape(matriz_triangulo.shape[0] * matriz_triangulo.shape[1])
+    triangulo_aplanado = triangulo.reshape(-1)
+    #print(np.shares_memory(matriz_triangulo, triangulo_aplanado))
+    return triangulo_aplanado
+
+def normalizar(triangulo_aplanado) -> np.ndarray:
+    return triangulo_aplanado/255
+
+def crear_dataset(tamano_dataset=100, x = 28, y = 28):
+    triangulos = crear_triangulos(tamano_dataset, x, y)
+    return triangulos
+
+def dataset_normalizado(triangulos_sin_normalizar):
+    
+    triangulos_norm_apl = torch.zeros(
+        (triangulos_sin_normalizar.shape[0], 784),
+        dtype=torch.float32
+    )
+    for i in range(len(triangulos_sin_normalizar)):
+        triangulo_aplanado_norm = normalizar(aplanar_triangulo(triangulos_sin_normalizar[i].copy()))
+        triangulo_tensor = torch.tensor(triangulo_aplanado_norm, dtype = torch.float32)
+        triangulos_norm_apl[i] = triangulo_tensor
+    return triangulos_norm_apl
+    
 
 def main():
     #triangulo = crear_matriz(28,28,1,14,10,7,10,21) 
@@ -73,8 +146,14 @@ def main():
     #crear_triangulo(triangulo, v1,v2,v3)
     #plt.imshow(triangulo,cmap='gray', vmin=0, vmax=255)
     #plt.savefig("triangulo2.png")
-
-    data_set = crear_triangulos(5,28,28)
+    np.random.seed(42)
+    dataset = crear_dataset(5,28,28)
+    datos_normalizados = dataset_normalizado(dataset)
+    print(dataset)
+    print(f"dataset.shape = {dataset.shape}")
+    #print(datos_normalizados)
+    print(torch.unique(datos_normalizados))
+    print(f"dataset_normalizado.shape = {datos_normalizados.shape}")
     #for i in (range(data_set.shape[0])):
     #    plt.imshow(data_set[i],cmap='gray', vmin=0, vmax=255)
     #    plt.savefig(f"triangulo_{i}.png")

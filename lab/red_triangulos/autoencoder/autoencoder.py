@@ -1,14 +1,7 @@
 import numpy as np
 import torch
 
-def aplanar_triangulos(matriz_triangulo) -> np.ndarray:
-    #triangulo_aplanado = matriz_triangulo.reshape(matriz_triangulo.shape[0] * matriz_triangulo.shape[1])
-    triangulo_aplanado = matriz_triangulo.reshape(-1)
-    print(np.shares_memory(matriz_triangulo, triangulo_aplanado))
-    return triangulo_aplanado
 
-def normalizar(triangulo_aplanado) -> np.ndarray:
-    return triangulo_aplanado/255
 
 
 def main():
