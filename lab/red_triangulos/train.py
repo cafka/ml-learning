@@ -5,7 +5,7 @@ import numpy as np
 import autoencoder.modelo as mod
 
 def train_loop(model, loss_fn, optimizer, total_size, batch_size, x_img_size, y_img_size):
-    np.random.seed(42)
+    #np.random.seed(42)
     iteraciones = total_size//batch_size
 
     # Set the model to training mode - important for batch normalization and dropout layers
@@ -28,8 +28,9 @@ def train_loop(model, loss_fn, optimizer, total_size, batch_size, x_img_size, y_
         print(f"loss: {loss:>7f}  [{current:>5d}/{total_size:>5d}]")
 
 
+
 def main():
-    total_size = 1000
+    total_size = 10000
     batch_size = 100
     x_img_size = 28
     y_img_size = 28
@@ -38,15 +39,22 @@ def main():
     loss_fn = torch.nn.MSELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
-    train_loop(
-        model=model,
-        loss_fn=loss_fn,
-        optimizer=optimizer,
-        total_size=total_size,
-        batch_size=batch_size,
-        x_img_size=x_img_size,
-        y_img_size=y_img_size
-    )
+    cant_epocas = 100
+    np.random.seed(42)
+
+    for epoch in range(cant_epocas):
+        train_loop(
+            model=model,
+            loss_fn=loss_fn,
+            optimizer=optimizer,
+            total_size=total_size,
+            batch_size=batch_size,
+            x_img_size=x_img_size,
+            y_img_size=y_img_size
+        )
+        print(f"Época {epoch + 1}/{cant_epocas}")
+
+    torch.save(model.state_dict(), "autoencoder_latente_3_v4.pth")
 
 if __name__ == "__main__":
     main()

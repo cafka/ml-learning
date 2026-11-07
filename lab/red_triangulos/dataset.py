@@ -90,7 +90,7 @@ def altura_valida (v1,v2,v3):
                 return True
 
 def crear_triangulo(matriz: np.array, v1, v2, v3):
-    print(f"v1 : {v1} - v2 : {v2} - v3 : {v3}")
+    #print(f"v1 : {v1} - v2 : {v2} - v3 : {v3}")
     #v1-v2
     crear_lado(matriz,v1,v2)
     #v2-v3
