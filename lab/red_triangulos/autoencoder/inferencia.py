@@ -1,7 +1,7 @@
 import torch
 import matplotlib.pyplot as plt
-import dataset as ds
-import autoencoder.modelo as mod
+from generadores import dataset as ds
+from . import modelo as mod
 import numpy as np
 
 # Cargar el modelo entrenado

@@ -1,7 +1,7 @@
 from autoencoder.modelo import Autoencoder
 import torch
 import numpy as np
-import dataset as ds
+from generadores import dataset as ds
 from autoencoder.autoencoder import aplanar_triangulos, normalizar
 import matplotlib.pyplot as plt
 

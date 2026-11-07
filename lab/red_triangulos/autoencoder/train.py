@@ -1,8 +1,8 @@
 import torch
 from torch import nn
-import dataset as ds
+from generadores import dataset as ds
 import numpy as np
-import autoencoder.modelo as mod
+from . import modelo as mod
 
 import time
 
