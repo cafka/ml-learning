@@ -4,6 +4,9 @@ import dataset as ds
 import numpy as np
 import autoencoder.modelo as mod
 
+import time
+
+
 def train_loop(model, loss_fn, optimizer, total_size, batch_size, x_img_size, y_img_size):
     #np.random.seed(42)
     iteraciones = total_size//batch_size
@@ -30,7 +33,7 @@ def train_loop(model, loss_fn, optimizer, total_size, batch_size, x_img_size, y_
 
 
 def main():
-    total_size = 10000
+    total_size = 50000
     batch_size = 100
     x_img_size = 28
     y_img_size = 28
@@ -41,8 +44,9 @@ def main():
 
     cant_epocas = 100
     np.random.seed(42)
-
+    inicio_entrenamiento = time.perf_counter()
     for epoch in range(cant_epocas):
+        inicio_epoca = time.perf_counter()
         train_loop(
             model=model,
             loss_fn=loss_fn,
@@ -52,9 +56,21 @@ def main():
             x_img_size=x_img_size,
             y_img_size=y_img_size
         )
-        print(f"Época {epoch + 1}/{cant_epocas}")
+        duracion_epoca = time.perf_counter() - inicio_epoca
+        tiempo_total = time.perf_counter() - inicio_entrenamiento
 
-    torch.save(model.state_dict(), "autoencoder_latente_3_v4.pth")
+        epocas_completadas = epoch + 1
+        promedio = tiempo_total / epocas_completadas
+        tiempo_restante = promedio * (cant_epocas - epocas_completadas)
+
+        print(
+            f"Época {epocas_completadas}/{cant_epocas} | "
+            f"Duración: {duracion_epoca:.2f} s | "
+            f"Transcurrido: {tiempo_total / 60:.2f} min | "
+            f"Restante estimado: {tiempo_restante / 60:.2f} min"
+        )
+
+    torch.save(model.state_dict(), "autoencoder_latente_16_v9.pth")
 
 if __name__ == "__main__":
     main()

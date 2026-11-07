@@ -6,13 +6,13 @@ class Autoencoder(nn.Module):
         super().__init__()
         self.capa1 = nn.Linear(28*28, 64)
         self.capa2 = nn.ReLU()
-        self.capa3 = nn.Linear(64,3)
+        self.capa3 = nn.Linear(64,16)
         self.linear_relu_stack_enc = nn.Sequential(
             self.capa1,
             self.capa2,
             self.capa3,
         )
-        self.capa4 = nn.Linear(3, 64)
+        self.capa4 = nn.Linear(16, 64)
         self.capa5 = nn.ReLU()
         self.capa6 = nn.Linear(64, 784)
         self.linear_relu_stack_dec = nn.Sequential(
